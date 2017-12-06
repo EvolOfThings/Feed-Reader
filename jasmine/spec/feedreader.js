@@ -46,7 +46,7 @@ $(function() {
          it('name is defined and not empty', function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
-                expect(feed.name.length).not.toBe(0);
+                expect(feed.name).not.toEqual();
             });
          });
     });
@@ -89,7 +89,7 @@ $(function() {
             //check the sidemenu is hidden by comparing the left position value
             let unclickedPos = sideMenu.position();
             let value = unclickedPos.left;
-            //if the value is equal or less than to zero then we know meu=nu is hidden
+            //if the value is equal or less than to zero then we know meunu is hidden
             function checkValue() {
                 if(value <= 0) {
                     expect(value).toBe(true);
@@ -99,20 +99,44 @@ $(function() {
     });
 
 
-
     /* TODO: Write a new test suite named "Initial Entries" */
 
+    describe('Initial Entries', function() {
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+        beforeEach(function(done) {
+            loadFeed(0);
+            done();
+            });
+
+        it('has at least one entry', function(done) {
+            expect($('.entry')).not.toBe(null);
+            done();
+        });
+
+    });
+
 
     /* TODO: Write a new test suite named "New Feed Selection" */
 
+    describe('New Feed Selection', function() {
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-}());
+
+
+
+
+
+
+
+
+
+
+     });
+});
