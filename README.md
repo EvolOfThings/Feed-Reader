@@ -12,4 +12,4 @@ This is part of Udacity's Frontend Web Developement nanodegree curriculum projec
 - jQuery
 
 #### How to view?
-You can view this project either by downloading the repo and opening index.html or simply [click this.](https://evolofthings.github.io/Feed-Reader/)
+You can view this project either by downloading the repo and opening index.html on your browser.
