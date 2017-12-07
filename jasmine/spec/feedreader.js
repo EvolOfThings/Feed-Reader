@@ -1,7 +1,7 @@
 /* feedreader.js
  *
  * This is the spec file that Jasmine will read and contains
- * all of the tests that will be run against the application.
+ * all of the tests that will be run against application.
  */
 
 $(function() {
@@ -22,8 +22,13 @@ $(function() {
          */
          it('have URL', function() {
             allFeeds.forEach(function(feed) {
-                expect(feed.url).toBeDefined();
-                expect(feed.url.length).not.toBe(0);
+
+                // expect(feed.url).toBeDefined();
+                // expect(feed.url.length).not.toBe(0);
+
+
+                //truthiness includes url.length === 0 and url === undefined
+                expect(feed.url).toBeTruthy();
             });
          });
 
@@ -64,16 +69,17 @@ $(function() {
             menuIcon.click(); //clicks the menu Icon
             expect($('body').hasClass('menu-hidden')).toBe(false);
 
-            //check the sidemenu position to know for sure
-            //the element shown by comparing its position values.
-            let clickedPos = sideMenu.position();
-            expect(clickedPos.left).toBeLessThan(0);
+            /* check the sidemenu position to know for sure
+             * the element shown by comparing its position values.
+             */
+            //let clickedPos = sideMenu.position();
+            //expect(clickedPos.left).toBeLessThan(0);
 
             menuIcon.click(); //clicks the icon to hide the menu
             expect($('body').hasClass('menu-hidden')).toBe(true);
 
-            //check the sidemenu is hidden by comparing the left position value
-            let unclickedPos = sideMenu.position();
+            /*check the sidemenu is hidden by comparing the left position value*/
+            /* let unclickedPos = sideMenu.position();
             let value = unclickedPos.left;
             //if the value is equal or less than zero then we know menu is hidden
             function checkValue() {
@@ -81,6 +87,7 @@ $(function() {
                     expect(value).toBe(true);
                 }
             };
+            */
       });
     });
 
@@ -99,7 +106,7 @@ $(function() {
             });
 
         it('has at least one entry', function(done) {
-            expect($('.entry')).not.toBe(null);
+            expect($('.entry-link .entry')).not.toBe(null);
             done();
         });
     });
@@ -114,14 +121,20 @@ $(function() {
          let feedContent;
 
          beforeEach(function(done) {
-            loadFeed(0, done);
+            loadFeed(0, function() {
             feedContent = $('.feed').html();
-            console.log(feedContent);
+            console.log($('.feed').html());
+            done();
+            });
          });
 
          it('content changes upon a new feed load', function(done) {
-            loadFeed(1, done);
-            expect($('.feed').html()).not.toEqual(feedContent);
+            loadFeed(1, function() {
+                feedContent2 = $('.feed').html();
+                expect(feedContent).not.toEqual(feedContent2);
+                console.log($('.feed').html());
+                done();
+            });
          });
      });
 });
