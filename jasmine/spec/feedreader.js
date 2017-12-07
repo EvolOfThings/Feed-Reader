@@ -101,13 +101,14 @@ $(function() {
          * loadFeed() is asynchronous.
          */
         beforeEach(function(done) {
-            loadFeed(0);
-            done();
-            });
+            loadFeed(0, done);
+        });
 
-        it('has at least one entry', function(done) {
-            expect($('.entry-link .entry')).not.toBe(null);
-            done();
+        it('has at least one entry', function() {
+            feedEntry = $('.feed .entry-link');
+            // console.log(feedEntry);
+            // console.log(feedEntry.length);
+            expect(feedEntry.length).not.toBe(0);
         });
     });
 
@@ -122,9 +123,9 @@ $(function() {
 
          beforeEach(function(done) {
             loadFeed(0, function() {
-            feedContent = $('.feed').html();
-            console.log($('.feed').html());
-            done();
+                feedContent = $('.feed').html();
+                console.log($('.feed').html());
+                done();
             });
          });
 
